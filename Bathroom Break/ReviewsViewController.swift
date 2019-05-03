@@ -26,16 +26,26 @@ class ReviewsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell") as! ReviewCell
         let review = reviews[indexPath.row]
-        print(review["author"])
         let user = review["author"] as! PFUser
         cell.nameLabel.text = user.username as! String
         cell.contentLabel.text = review["content"] as! String
+        
+        
+//        let imageFile = review["image"] as! PFFileObject
+//        let urlString = imageFile.url!
+//        let url = URL(string: urlString)!
+//        cell.bathroomImageView.af_setImage(withURL: url)
+        
+        
         return cell
     }
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
         super.viewDidLoad()
+        
+        tableView.rowHeight = 180
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -49,6 +59,7 @@ class ReviewsViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else {
                 //The object has been retrieved
                 self.bathroomName.text = bathroom!["location"] as! String
+                //self.bathroomID.text = bathroom?.objectId
                 self.bathroomRatingLabel.text = String(bathroom!["rating"] as! Int)
                 let imageFile = bathroom!["image"] as! PFFileObject
                 let urlString = imageFile.url!

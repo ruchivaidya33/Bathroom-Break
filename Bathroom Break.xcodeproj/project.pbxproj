@@ -21,6 +21,7 @@
 		54FD5DA0225669F3008BE606 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54FD5D9F225669F3008BE606 /* Assets.xcassets */; };
 		54FD5DA3225669F3008BE606 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54FD5DA1225669F3008BE606 /* LaunchScreen.storyboard */; };
 		54FFA13722712791003390AC /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FFA13622712791003390AC /* ReviewsViewController.swift */; };
+		C07CCFDB2279292B002A8EAE /* NewReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCFDA2279292B002A8EAE /* NewReviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		54FFA13622712791003390AC /* ReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
 		78985DD2BEA5CC8CCA15FCDE /* Pods-Bathroom Break.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bathroom Break.debug.xcconfig"; path = "Target Support Files/Pods-Bathroom Break/Pods-Bathroom Break.debug.xcconfig"; sourceTree = "<group>"; };
 		9FE81CC52FD7169214544793 /* Pods_Bathroom_Break.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bathroom_Break.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C07CCFDA2279292B002A8EAE /* NewReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				54FD5D9F225669F3008BE606 /* Assets.xcassets */,
 				54FD5D98225669ED008BE606 /* AppDelegate.swift */,
 				54FD5D9C225669ED008BE606 /* Main.storyboard */,
+				C07CCFDA2279292B002A8EAE /* NewReviewViewController.swift */,
 				54FD5DA1225669F3008BE606 /* LaunchScreen.storyboard */,
 				54FD5DA4225669F3008BE606 /* Info.plist */,
 				543F054B22613E1300EF02C1 /* SignUpViewController.swift */,
@@ -240,6 +243,7 @@
 			files = (
 				543F054E2261509C00EF02C1 /* LoginViewController.swift in Sources */,
 				543F054C22613E1300EF02C1 /* SignUpViewController.swift in Sources */,
+				C07CCFDB2279292B002A8EAE /* NewReviewViewController.swift in Sources */,
 				54FBE13F2277B32800DB7116 /* BathroomViewController.swift in Sources */,
 				54FD5D99225669ED008BE606 /* AppDelegate.swift in Sources */,
 				5401B9B4226E6AA0003C2D48 /* NewBathroomViewController.swift in Sources */,

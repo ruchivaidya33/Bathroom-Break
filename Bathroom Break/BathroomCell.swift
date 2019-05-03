@@ -13,8 +13,8 @@ class BathroomCell: UITableViewCell {
     @IBOutlet weak var bathroomImage: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var overallRatingLabel: UILabel!
-    @IBOutlet weak var cleanlinessLabel: UILabel!
-    @IBOutlet weak var experienceLabel: UILabel!
+    @IBOutlet weak var numberOfReviewsLabel: UILabel!
+    @IBOutlet weak var bathroomIDLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -27,5 +27,6 @@ class BathroomCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
 
 }

@@ -1,76 +1,35 @@
 //
-//  NewBathroomViewController.swift
+//  NewReviewViewController.swift
 //  Bathroom Break
 //
-//  Created by Christopher Dabalsa on 4/22/19.
+//  Created by Honors on 4/30/19.
 //  Copyright © 2019 Team Notify. All rights reserved.
 //
 
 import UIKit
-import AlamofireImage
 import Parse
+import AlamofireImage
 
-class NewBathroomViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        purchaseLabel.isHidden = true
-        purchaseSwitch.isHidden = true
-        purchaseSwitch.isOn = false
-        reviewTextField.layer.borderWidth = 1
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    
+class NewReviewViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var cameraView: UIImageView!
-    
-    
-    @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var openingTimeField: UITextField!
-    @IBOutlet weak var closingTimeField: UITextField!
+    @IBOutlet weak var closingTImeField: UITextField!
+    @IBOutlet weak var sizeSelection: UISegmentedControl!
+    @IBOutlet weak var unisexSelection: UISegmentedControl!
     @IBOutlet weak var disabilitySelection: UISegmentedControl!
     @IBOutlet weak var publicPrivateSelection: UISegmentedControl!
-    @IBOutlet weak var unisexSelection: UISegmentedControl!
-    @IBOutlet weak var sizeSelection: UISegmentedControl!
     @IBOutlet weak var purchaseSwitch: UISwitch!
     @IBOutlet weak var purchaseLabel: UILabel!
     @IBOutlet weak var reviewTextField: UITextView!
     
-   
     
-    @IBAction func onClickSubmit(_ sender: Any) {
-        let bathroom = PFObject(className: "Bathrooms")
-        bathroom["location"] = locationField.text!
-        bathroom["author"] = PFUser.current()!
-        let imageData = cameraView.image?.pngData()
-        let file = PFFileObject(data:imageData!)
-        bathroom["image"] = file
-        bathroom["opening"] = openingTimeField.text!
-        bathroom["closing"] = closingTimeField.text!
-        bathroom["size"] = sizeSelection.titleForSegment(at: sizeSelection.selectedSegmentIndex)
-        bathroom["unisex"] = unisexSelection.titleForSegment(at: unisexSelection.selectedSegmentIndex)
-        bathroom["disability"] = disabilitySelection.titleForSegment(at: disabilitySelection.selectedSegmentIndex)
-        bathroom["publicprivate"] = publicPrivateSelection.titleForSegment(at: publicPrivateSelection.selectedSegmentIndex)
-        bathroom["purchase"] = purchaseSwitch.isOn
-        bathroom["rating"] = current_rating
-        bathroom.saveInBackground { (success, error) in
-            if success{
-                UserDefaults.standard.set(bathroom.objectId, forKey: "bathroomID")
-                let review = PFObject(className: "Reviews")
-                review["content"] = self.reviewTextField.text!
-                review["bathroomID"] = bathroom.objectId
-                review["image"] = file
-                review["author"] = PFUser.current()!
-                review.saveInBackground()
-                self.performSegue(withIdentifier: "createdBathroomSegue", sender: nil)
-                print("saved")
-            }else{
-                self.dismiss(animated: true, completion: nil)
-                print("error!")
-            }
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
-    
     
     @IBAction func onCameraClick(_ sender: Any) {
         let picker = UIImagePickerController()
@@ -81,7 +40,7 @@ class NewBathroomViewController: UIViewController, UIImagePickerControllerDelega
         }else {
             picker.sourceType = .photoLibrary
         }
-        present(picker, animated:true, completion:nil)
+        present(picker, animated:true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -91,14 +50,13 @@ class NewBathroomViewController: UIViewController, UIImagePickerControllerDelega
         cameraView.image = scaledImage
         dismiss(animated:true,completion:nil)
     }
-
-   var current_rating = 1
+    
+    var current_rating = 1
     
     @IBOutlet weak var star2: UIButton!
     @IBOutlet weak var star3: UIButton!
     @IBOutlet weak var star4: UIButton!
     @IBOutlet weak var star5: UIButton!
-    
     
     @IBAction func onClickStar1(_ sender: Any) {
         star2.setImage(UIImage(named:"white_star"),for: .normal)
@@ -113,7 +71,7 @@ class NewBathroomViewController: UIViewController, UIImagePickerControllerDelega
         star3.setImage(UIImage(named:"white_star"),for: .normal)
         star4.setImage(UIImage(named:"white_star"),for: .normal)
         star5.setImage(UIImage(named:"white_star"),for: .normal)
-         current_rating = 2
+        current_rating = 2
     }
     
     @IBAction func onClickStar3(_ sender: Any) {
@@ -140,7 +98,6 @@ class NewBathroomViewController: UIViewController, UIImagePickerControllerDelega
         current_rating = 5
     }
     
-    
     @IBAction func onSwitchPublicPrivate(_ sender: Any) {
         if publicPrivateSelection.titleForSegment(at: publicPrivateSelection.selectedSegmentIndex) == "Private" {
             purchaseLabel.isHidden = false
@@ -152,11 +109,31 @@ class NewBathroomViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    
-    
-    
-    
-    
+    @IBAction func onClickSubmit(_ sender: Any) {
+        let review = PFObject(className: "Reviews")
+        let bathroom = PFObject(className: "Bathrooms")
+
+        let imageData = cameraView.image?.pngData()
+        let file = PFFileObject(data:imageData!)
+
+        review.saveInBackground { (success, error) in
+            if success{
+                UserDefaults.standard.set(review.objectId, forKey: "bathroomID")
+                
+                review["content"] = self.reviewTextField.text!
+                review["bathroomID"] = bathroom.objectId
+                review["image"] = file
+                review["author"] = PFUser.current()!
+                review.saveInBackground()
+                //self.performSegue(withIdentifier: "createdBathroomSegue", sender: nil)
+                print("saved")
+            }else{
+                self.dismiss(animated: true, completion: nil)
+                print("error!")
+                
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 
